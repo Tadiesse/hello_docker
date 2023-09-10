@@ -10,11 +10,9 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Build the hello-world Docker image
-      run: |
-        echo $CR_PAT | docker login ghcr.io -u Tadiesse --password-stdin
-      env:s
+      env:
         CR_PAT: ${{ secrets.CR_PAT }}
-      run: |
+      run: |  
         docker build . --tag ghcr.io/Tadiesse/hello_docker:latest
         docker run ghcr.io/Tadiesse/hello_docker:latest
-        docker push ghcr.io/Tadiesse/hello_docker:latest
+        docker push ghcr.io/Tadiesse/hello_docker:latest  
