@@ -14,7 +14,7 @@ jobs:
         echo $CR_PAT | docker login ghcr.io -u Tadiesse --password-stdin
       env:s
         CR_PAT: ${{ secrets.CR_PAT }}
-
-docker build . --tag ghcr.io/Tadiesse/hello_docker:latest
+      run: |
+        docker build . --tag ghcr.io/Tadiesse/hello_docker:latest
         docker run ghcr.io/Tadiesse/hello_docker:latest
         docker push ghcr.io/Tadiesse/hello_docker:latest
