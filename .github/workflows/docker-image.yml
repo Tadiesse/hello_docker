@@ -34,4 +34,4 @@ jobs:
       - name: Sign the published Docker image
         env:
           COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
-        run: cosign sign --key cosign.key ghcr.io/tadiesse/hello-docker:latest
+        run: cosign sign --key cosign.key ghcr.io/tadiesse/key_pair_signed
