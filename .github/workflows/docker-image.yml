@@ -31,13 +31,9 @@ jobs:
         # uses: sigstore/cosign-installer@11086d25041f77fe8fe7b9ea4e48e3b9192b8f19
         uses: sigstore/cosign-installer@v3.1.2
         
-      - name: Write signing key to disk
-        run: 'echo "$KEY" > cosign.key'
-        shell: bash
+      - name: Sign image with a key
+        run: |
+          cosign sign --yes --key env://COSIGN_PRIVATE_KEY  ghcr.io/tadiesse/hello-docker:latest
         env:
-          KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
-
-      - name: Sign the published Docker image
-        env:
+          COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
           COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
-        run: cosign sign --key cosign.key ghcr.io/tadiesse/key_pair_signed
