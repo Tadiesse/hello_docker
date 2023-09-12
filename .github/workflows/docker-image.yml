@@ -18,5 +18,3 @@ jobs:
       run: |
             docker build . --file Dockerfile --tag hello-docker:$(date +%s)
             docker push ghcr.io/tadiesse/hello-docker:$(date +%s)
-
-
