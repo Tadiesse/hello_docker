@@ -9,5 +9,9 @@ This signature method is more difficult and time-consuming to implement on GitHu
 
 To use this signing method, one must first create a key pair and then create a Cosign password in order to use the private key. This metod is a bit difficult to implement as it  requires inputs from outside GitHub. 
 
+##How to verify an image signature made with key-pairs
+´´´´ cosign verify --key cosign.pub ghcr.io/USERNAME/IMAGE_NAME ´´´´
+
+
 ## How to sign one's image with the private key?
 create a PAT -> 
