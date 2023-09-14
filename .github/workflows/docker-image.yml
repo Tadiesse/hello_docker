@@ -33,7 +33,7 @@ jobs:
         
       - name: Sign image with a key
         run: |
-          cosign sign --yes --key env://COSIGN_PRIVATE_KEY  ghcr.io/tadiesse/hello-docker:latest
+          cosign sign --yes --key env://COSIGN_PRIVATE_KEY -a "author=AlvinWorkingStudent"  ghcr.io/tadiesse/hello-docker:latest
         env:
           COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
           COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
