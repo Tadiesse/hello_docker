@@ -33,7 +33,8 @@ jobs:
         run: |
           docker build . --tag ghcr.io/tadiesse/hello-docker:latest
           docker push ghcr.io/tadiesse/hello-docker:latest
-        
+
+      
       - name: Sign image with a key
         run: |
           cosign sign --yes --key env://COSIGN_PRIVATE_KEY -a "author=AlvinWorkingStudent"  ghcr.io/tadiesse/hello-docker:latest
