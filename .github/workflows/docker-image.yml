@@ -10,6 +10,10 @@ on:
 jobs:
   push-store-image:
     runs-on: self-hosted
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
     steps:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
