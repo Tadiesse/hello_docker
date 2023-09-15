@@ -1,11 +1,11 @@
 
 name: Deploy Images to GHCR
 
-# on:
-#   push:
-#     branches:
-#       - main
-#   workflow_dispatch:
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 # jobs:
 #   push-store-image:
@@ -19,12 +19,6 @@ name: Deploy Images to GHCR
 #         uses: sigstore/cosign-installer@main
 
 
-on:
-  workflow_call:
-    inputs:
-      flavor:
-        required: true
-        type: string
 
 jobs:
   build:
