@@ -7,30 +7,14 @@ on:
       - main
   workflow_dispatch:
 
-# jobs:
-#   push-store-image:
-#     runs-on: self-hosted
-#     permissions:
-#       contents: read
-#       packages: write
-#       id-token: write
-#     steps:
-#       - name: Install Cosign
-#         uses: sigstore/cosign-installer@main
-
-
-
 jobs:
   build:
     runs-on: self-hosted
     permissions:
       id-token: write
     steps:
-      - name: Install Cosign
-        uses: sigstore/cosign-installer@main
-        
-
-
+      # - name: Install Cosign
+      #   uses: sigstore/cosign-installer@main
 
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
@@ -49,10 +33,10 @@ jobs:
           docker push ghcr.io/tadiesse/hello-docker:latest
 
       
-      - name: Sign image with a key
-        run: |
-          cosign sign --yes --key env://COSIGN_PRIVATE_KEY -a "author=AlvinWorkingStudent"  ghcr.io/tadiesse/hello-docker:latest
-        env:
-          COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
-          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+      # - name: Sign image with a key
+      #   run: |
+      #     cosign sign --yes --key env://COSIGN_PRIVATE_KEY -a "author=AlvinWorkingStudent"  ghcr.io/tadiesse/hello-docker:latest
+      #   env:
+      #     COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+      #     COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
 
