@@ -35,7 +35,7 @@ jobs:
           docker push ghcr.io/tadiesse/hello-docker:latest
 
       - name: cosign-installer
-        uses: sigstore/cosign-installer@v1.0.0
+        uses: sigstore/cosign-installer@v3.1.1
 
 
 
