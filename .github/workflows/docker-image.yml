@@ -34,17 +34,10 @@ jobs:
           docker build . --tag ghcr.io/tadiesse/hello-docker:latest
           docker push ghcr.io/tadiesse/hello-docker:latest
 
-
-      - name: Install CoSign
-        run: |
-          # Download CoSign binary
-          Invoke-WebRequest -Uri https://github.com/sigstore/cosign/releases/latest/download/cosign-windows-amd64.exe -OutFile cosign.exe
-    
-          # Make it executable
-          chmod +x cosign.exe
-    
-          # Move to a directory in your PATH
-          Move-Item -Path .\cosign.exe -Destination C:\path\to\directory\in\PATH
+      - name: cosign-installer
+        # You may pin to the exact commit or the version.
+        # uses: sigstore/cosign-installer@11086d25041f77fe8fe7b9ea4e48e3b9192b8f19
+        uses: sigstore/cosign-installer@main #v3.1.2
 
 
       
