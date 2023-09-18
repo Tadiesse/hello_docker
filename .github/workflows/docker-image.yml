@@ -36,7 +36,7 @@ jobs:
 
       - name: Sign image with a key
         run: |
-          cosign sign --yes --key cosign.key -a "author=AlvinWorkingStudent"  ghcr.io/tadiesse/hello-docker:latest
+          cosign sign --yes --key C:\Users\z004rwpj\Downloads\cosign.key -a "author=AlvinWorkingStudent"  ghcr.io/tadiesse/hello-docker:latest
 
 
 
