@@ -34,12 +34,16 @@ jobs:
           docker build . --tag ghcr.io/tadiesse/hello-docker:latest
           docker push ghcr.io/tadiesse/hello-docker:latest
 
-      - name: cosign-installer
-        uses: sigstore/cosign-installer@v3.1.2
-            
+      - name: Sign image with a key
+        run: |
+          cosign sign --yes --key cosign.key -a "author=AlvinWorkingStudent"  ghcr.io/tadiesse/hello-docker:latest
 
 
 
+
+
+      # - name: cosign-installer
+      #   uses: sigstore/cosign-installer@v3.1.2
       
       # - name: Sign image with a key
       #   run: |
