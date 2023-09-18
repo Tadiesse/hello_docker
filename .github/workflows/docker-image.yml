@@ -38,7 +38,7 @@ jobs:
         run: |
           cosign sign --yes --key C:\Users\z004rwpj\Downloads\cosign.key ghcr.io/tadiesse/hello-docker@sha256:d06630f27b5fe95c0ab371dbc7c1d7d4cbefbcc08a21da175477f8ee76100fd1
         env:
-          COSIGN_PASSWORD: pwd123    #${{ secrets.COSIGN_PASSWORD }}
+          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
 
 
 
