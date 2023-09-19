@@ -58,19 +58,16 @@ jobs:
           # Read the content of your text file into a variable
           $fileContent = Get-Content -Path C:\Users\z004rwpj\Documents\Alex_tasks\actions-runner\COSIGN_PASSWORD.txt
           echo "::set-output name=fileContent::$fileContent"
-        shell: pwsh
 
       - name: Set Environment Variable
         run: |
           # Set the environment variable with the file content
           echo "FILE_CONTENT=$env:fileContent" >> $GITHUB_ENV
-        shell: pwsh
-
+          
       - name: Verify Environment Variable
         run: |
           # Verify the environment variable is set
           echo "FILE_CONTENT: $FILE_CONTENT"
-        shell: pwsh
 
 
 
