@@ -41,7 +41,7 @@ jobs:
       - name: Use the value
         id: step_two
         run: |
-          printf '%s\n' "$action_state"
+          echo "$action_state"
 
       # - name: Sign image with a key
       #   run: |
