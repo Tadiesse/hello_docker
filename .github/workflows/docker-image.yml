@@ -46,7 +46,7 @@ jobs:
           echo this the file content: $fileContent
           echo this is the env variable from the host $env:cosign_env
           echo this file content with env ${{ env.fileContent }}
-          echo this is env variable with env ${{ env.env:cosign_env }}
+          echo this is env variable with env ${{ env.$env:cosign_env }}
           
 
           
