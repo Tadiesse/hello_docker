@@ -31,28 +31,33 @@ jobs:
           docker build . --tag ghcr.io/tadiesse/hello-docker:latest
           docker push ghcr.io/tadiesse/hello-docker:latest
 
-      - name: Set values
+      - name: sign
         run: |
           $fileContent = Get-Content -Path C:\Users\z004rwpj\Documents\Alex_tasks\actions-runner\COSIGN_PASSWORD.txt
           echo this the file content: $fileContent
           echo this is the env variable from the host $env:cosign_env
-          echo "fileContent=${{ env.fileContent }}" >> $GITHUB_ENV
-          echo "cosign_env=${{ env.cosign_env }}" >> $GITHUB_ENV
+          # echo "fileContent=${{ env.fileContent }}" >> $GITHUB_ENV
+          # echo "cosign_env=${{ env.cosign_env }}" >> $GITHUB_ENV
+          cosign sign --yes --key C:\Users\z004rwpj\Downloads\cosign.key ghcr.io/tadiesse/hello-docker@sha256:d06630f27b5fe95c0ab371dbc7c1d7d4cbefbcc08a21da175477f8ee76100fd1
 
           
-      - name: Sign image with a key
-        run: |
-          #echo this file content with ${{ env.fileContent }}
-          #echo this is env variable with ${{ env.cosign_env }}
-          echo "ok here is the file content: $First_Name"
-          echo "ok here is the cosign env: $Second_Name"
-        env:
-          First_Name: ${{ env.fileContent }}
-          Second_Name: $env:cosign_env
-        #   cosign sign --yes --key C:\Users\z004rwpj\Downloads\cosign.key ghcr.io/tadiesse/hello-docker@sha256:d06630f27b5fe95c0ab371dbc7c1d7d4cbefbcc08a21da175477f8ee76100fd1
-        # env:
-        #   COSIGN_PASSWORD:  pwd123
+      # - name: Sign image with a key
+      #   run: cosign sign --yes --key C:\Users\z004rwpj\Downloads\cosign.key ghcr.io/tadiesse/hello-docker@sha256:d06630f27b5fe95c0ab371dbc7c1d7d4cbefbcc08a21da175477f8ee76100fd1
+
         
+        #echo this file content with ${{ env.fileContent }}
+        #echo this is env variable with ${{ env.cosign_env }}
+        #   echo "ok here is the file content: $file_content"
+        #   echo "ok here is the cosign env: $cosign_env"
+        # env:
+        #   file_content: ${{ env.fileContent }}
+        #   cosign_env: $env:cosign_env
+          
+        # env:
+        #   COSIGN_PASSWORD:  ${{ env.fileContent }} #pwd123
+
+
+
       - name: Run the command inputs
         run: |
           echo "the input variable is ${{ inputs.cosign_input }}"
