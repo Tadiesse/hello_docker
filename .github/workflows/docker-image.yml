@@ -20,18 +20,18 @@ jobs:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
         
-      - name: 'Login to GitHub Container Registry'
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+      # - name: 'Login to GitHub Container Registry'
+      #   uses: docker/login-action@v3
+      #   with:
+      #     registry: ghcr.io
+      #     username: ${{ github.actor }}
+      #     password: ${{ secrets.GITHUB_TOKEN }}
             
-      - name: 'Build Inventory Image'
-        working-directory: ./
-        run: |
-          docker build . --tag ghcr.io/tadiesse/hello-docker:latest
-          docker push ghcr.io/tadiesse/hello-docker:latest
+      # - name: 'Build Inventory Image'
+      #   working-directory: ./
+      #   run: |
+      #     docker build . --tag ghcr.io/tadiesse/hello-docker:latest
+      #     docker push ghcr.io/tadiesse/hello-docker:latest
 
 
       # - name: Set the value
@@ -50,7 +50,12 @@ jobs:
       - name: Sign image with a key
         run: |
           echo this file content with env ${{ env.fileContent }}
-          echo this is env variable with env ${{ env.cosign_env }}          
+          echo this is env variable with env ${{ env.cosign_env }}
+          echo ok here i am: $First_Name
+          echo bon voici l'environ: $Second_Name
+        env:
+          First_Name: $fileContent
+          Second_Name: $env:cosign_env
         #   cosign sign --yes --key C:\Users\z004rwpj\Downloads\cosign.key ghcr.io/tadiesse/hello-docker@sha256:d06630f27b5fe95c0ab371dbc7c1d7d4cbefbcc08a21da175477f8ee76100fd1
         # env:
         #   COSIGN_PASSWORD:  pwd123
