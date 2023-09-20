@@ -20,18 +20,18 @@ jobs:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
         
-      # - name: 'Login to GitHub Container Registry'
-      #   uses: docker/login-action@v3
-      #   with:
-      #     registry: ghcr.io
-      #     username: ${{ github.actor }}
-      #     password: ${{ secrets.GITHUB_TOKEN }}
+      - name: 'Login to GitHub Container Registry'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
             
-      # - name: 'Build Inventory Image'
-      #   working-directory: ./
-      #   run: |
-      #     docker build . --tag ghcr.io/tadiesse/hello-docker:latest
-      #     docker push ghcr.io/tadiesse/hello-docker:latest
+      - name: 'Build Inventory Image'
+        working-directory: ./
+        run: |
+          docker build . --tag ghcr.io/tadiesse/hello-docker:latest
+          docker push ghcr.io/tadiesse/hello-docker:latest
 
 
       # - name: Set the value
@@ -49,8 +49,8 @@ jobs:
           
       - name: Sign image with a key
         run: |
-          echo this file content with env ${{ env.fileContent }}
-          echo this is env variable with env ${{ env.cosign_env }}
+          echo this file content with ${{ env.fileContent }}
+          echo this is env variable with ${{ env.cosign_env }}
           echo ok here i am: $First_Name
           echo bon voici l'environ: $Second_Name
         env:
