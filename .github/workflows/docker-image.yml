@@ -51,8 +51,8 @@ jobs:
         run: |
           echo this file content with ${{ env.fileContent }}
           echo this is env variable with ${{ env.cosign_env }}
-          echo ok here i am: $First_Name
-          echo bon voici l'environ: $Second_Name
+          echo "ok here i am: $First_Name"
+          echo "bon voici l'environ: $Second_Name"
         env:
           First_Name: $fileContent
           Second_Name: $env:cosign_env
