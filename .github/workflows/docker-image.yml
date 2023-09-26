@@ -25,14 +25,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
             
-      - name: 'Build Inventory Image'
+      - name: Build and Sign the image 
         working-directory: ./
         run: |
           docker build . --tag ghcr.io/tadiesse/hello-docker:latest
           docker push ghcr.io/tadiesse/hello-docker:latest
-
-      - name: sign
-        run: |
           cosign sign --yes --key C:\Users\z004rwpj\Documents\Alex_tasks\actions-runner\cosign.key ghcr.io/tadiesse/hello-docker@sha256:d06630f27b5fe95c0ab371dbc7c1d7d4cbefbcc08a21da175477f8ee76100fd1
       
       
