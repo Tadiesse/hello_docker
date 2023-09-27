@@ -25,9 +25,19 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
             
-      - name: Build and Sign the image 
+      - name: Build the image 
         working-directory: ./
         run: |
           docker build . --tag ghcr.io/tadiesse/hello-docker:latest
-          cosign sign --yes --key C:\Users\z004rwpj\Documents\Alex_tasks\actions-runner\cosign.key ghcr.io/tadiesse/hello-docker@sha256:d06630f27b5fe95c0ab371dbc7c1d7d4cbefbcc08a21da175477f8ee76100fd1
+          #docker build . --tag ghcr.io/tadiesse/hi-docker:latest
+          #cosign sign --yes --key C:\Users\z004rwpj\Documents\Alex_tasks\actions-runner\cosign.key ghcr.io/tadiesse/hello-docker@sha256:d06630f27b5fe95c0ab371dbc7c1d7d4cbefbcc08a21da175477f8ee76100fd1
           docker push ghcr.io/tadiesse/hello-docker:latest
+
+      - name: Build the image 
+        working-directory: C:\Users\z004rwpj\Documents\Alex_tasks\signserver-clientcli\signserver\bin\
+        run: |
+          cosign generate ghcr.io/tadiesse/hello-docker > payload.json
+          Get-Content payload.json | Get-FileHash -Algorithm SHA256 | ForEach-Object { $_.Hash } | Out-File -Encoding ASCII -FilePath payload.hash
+          signclient signdocument -workername CosignIntegrationTest -infile payload.hash -outfile payload.sig -host signservice-playground.ct.siemens.com -port 443 -truststore truststore-playground.jks
+          [convert]::ToBase64String([System.IO.File]::ReadAllBytes('payload.sig')) | Out-File -Encoding ASCII -FilePath payloadbase64.sig
+          cosign attach signature --payload payload.json --signature payloadbase64.sig ghcr.io/tadiesse/hello-docker
