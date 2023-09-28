@@ -41,4 +41,3 @@ jobs:
           [convert]::ToBase64String([System.IO.File]::ReadAllBytes('payload.sig')) | Out-File -Encoding ASCII -FilePath payloadbase64.sig
           cosign attach signature --payload payload.json --signature payloadbase64.sig ghcr.io/tadiesse/hi-docker:latest
           docker push ghcr.io/tadiesse/hi-docker:latest
-          
