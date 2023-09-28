@@ -28,19 +28,19 @@ jobs:
       - name: Build the image 
         working-directory: ./
         run: |
-          docker build . --tag ghcr.io/tadiesse/image-hsm:latest    
+          docker build . --tag ghcr.io/tadiesse/hello-docker:latest    
 
       - name: Build the Signature and  Push the image
         working-directory: C:\Users\z004rwpj\Documents\Alex_tasks\signserver-clientcli\signserver\bin\
         run: |
-          cosign generate ghcr.io/tadiesse/image-hsm:latest > payload.json
+          cosign generate ghcr.io/tadiesse/hello-docker:latest > payload.json
           Get-Content payload.json | Get-FileHash -Algorithm SHA256 | ForEach-Object { $_.Hash } | Out-File -Encoding ASCII -FilePath payload.hash
           # .\signclient signdocument -workername CosignIntegrationTest -infile payload.hash -outfile payload.sig -host signservice-playground.ct.siemens.com -port 443 -truststore truststore-playground.jks -truststorepwd $env:TRUSTSTORE_PASSWORD
           # [convert]::ToBase64String([System.IO.File]::ReadAllBytes('payload.sig')) | Out-File -Encoding ASCII -FilePath payloadbase64.sig
-          # cosign attach signature --payload payload.json --signature payloadbase64.sig ghcr.io/tadiesse/hi-docker:latest
+          # cosign attach signature --payload payload.json --signature payloadbase64.sig ghcr.io/tadiesse/hello-docker:latest
 
 
       - name: Push the image 
         working-directory: ./
         run: |
-          docker push ghcr.io/tadiesse/image-hsm:latest
+          docker push ghcr.io/tadiesse/hello-docker:latest
