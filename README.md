@@ -17,6 +17,13 @@ In the command prompt, type in:
 
 
 # Sign images with aprivate key in an HSM
+
+## Requirements
+In order to be able able to use a Siemens private key stored in a HSM, one must first:
+- install signserver
+- download the file truststore-playground.jks
+
+  
 run this script on Powershell while changing the name of the repo and that of the image.
 
           cosign generate ghcr.io/{repo}/{IMAGE_NAME} > payload.json
