@@ -19,7 +19,7 @@ In the command prompt, type in:
 # Sign images with aprivate key in an HSM
 run this script on Powershell while changing the name of the repo and that of the image.
 
-          cosign generate ghcr.io/tadiesse/hello-docker > payload.json
+          cosign generate ghcr.io/{repo}/{IMAGE_NAME} > payload.json
           
           Get-Content payload.json | Get-FileHash -Algorithm SHA256 | ForEach-Object { $_.Hash } | Out-File -Encoding ASCII -FilePath payload.hash
           
@@ -27,4 +27,4 @@ run this script on Powershell while changing the name of the repo and that of th
           
           [convert]::ToBase64String([System.IO.File]::ReadAllBytes('payload.sig')) | Out-File -Encoding ASCII -FilePath payloadbase64.sig
           
-          cosign attach signature --payload payload.json --signature payloadbase64.sig ghcr.io/tadiesse/hello-docker
+          cosign attach signature --payload payload.json --signature payloadbase64.sig ghcr.io/{repo}/{IMAGE_NAME}
